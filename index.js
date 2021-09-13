@@ -12,13 +12,12 @@ checkButton.addEventListener("click", function validateAmount() {
       const amountToReturned = cashGiven.value - billAmount.value;
       calculateChange(amountToReturned);
     } else {
-      showMessage("Cash provided should be atlest equal to the bill amount");
+      showMessage("Cash provided should be atlest equal to the bill amount.");
     }
   } else {
     showMessage("Invalid Bill Amount");
   }
 });
-
 function showMessage(msg) {
   message.style.display = "block";
   message.innerText = msg;
