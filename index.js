@@ -6,13 +6,9 @@ var outputamt = document.querySelector(".inputbox-cashgiven");
 var check = document.querySelector(".check");
 var cashmsg = document.querySelector(".cashmsg");
 var ctable = document.querySelector(".table");
-
 hide(nextdiv);
 hide(cashmsg);
 hide(ctable);
-
-
-
 
 nxtbtn.addEventListener("click", function next() {
     if (Number(inputamt.value) > 0) {
@@ -41,10 +37,8 @@ check.addEventListener("click", function check() {
         hide(ctable);
 
     } else {
-
         var amount = Number(outputamt.value) - Number(inputamt.value);
         returnAmount(amount);
-
     }
 })
 
@@ -58,13 +52,10 @@ function hide(input) {
 
 function errormessage(typ, msg) {
     typ.innerText = msg;
-
 }
 const bills = [2000, 500, 100, 20, 10, 5, 1];
 
 function returnAmount(amount) {
-
-
     for (var i = 0; i < bills.length; i++) {
         var c = Math.trunc(amount / bills[i]);
 
@@ -77,6 +68,4 @@ function returnAmount(amount) {
     }
     show(ctable, "block");
     hide(cashmsg);
-
-
 }
