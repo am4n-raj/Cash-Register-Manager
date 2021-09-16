@@ -3,10 +3,9 @@
  color:white;
 }
 .container{
-    border: 2px solid lightblue;
     display: flex;
     flex-direction: column;
-    width: 60vw;
+    width: 65%;
     margin: auto;
     text-align: center;
     align-items: center;
@@ -40,4 +39,18 @@
 .container #error-message{
     color: crimson;
     font-size: 20px;
+}
+table,th,td{
+    border: 1px solid white;
+    color: cyan;
+}
+
+td{
+    padding:1.5rem;
+    color: crimson;
+    font-size: 18px;
+}
+caption{
+    margin-top: 6px;
+    margin-bottom: 16px;
 }

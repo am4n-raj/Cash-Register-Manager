@@ -1,33 +1,82 @@
-const billAmount = document.querySelector("#bill-amount");
-const cashGiven = document.querySelector("#cash-given");
-const checkButton = document.querySelector("#check-button");
-const message = document.querySelector("#error-message");
-const noOfNotes = document.querySelectorAll(".no-of-notes");
-const availableNotes = [2000, 500, 100, 20, 10, 5, 1];
+var nxtbtn = document.querySelector(".nxtbtn");
+var inputamt = document.querySelector(".inputbox-bill");
+var nextdiv = document.querySelector(".next-div");
+var emsg = document.querySelector(".errormsg");
+var outputamt = document.querySelector(".inputbox-cashgiven");
+var check = document.querySelector(".check");
+var cashmsg = document.querySelector(".cashmsg");
+var ctable = document.querySelector(".table");
 
-checkButton.addEventListener("click", function validateAmount() {
-  message.style.display = "none";
-  if (billAmount.value > 0) {
-    if (cashGiven.value >= billAmount.value) {
-      const amountToReturned = cashGiven.value - billAmount.value;
-      calculateChange(amountToReturned);
+hide(nextdiv);
+hide(cashmsg);
+hide(ctable);
+
+
+
+
+nxtbtn.addEventListener("click", function next() {
+    if (Number(inputamt.value) > 0) {
+        hide(emsg);
+        for (var i = 0; i < 7; i++) {
+            var req = document.querySelector(".row" + i);
+            req.innerText = "";
+        }
+        show(nextdiv, "block");
     } else {
-      showMessage("Cash provided should be atlest equal to the bill amount.");
+        console.log("printed");
+        errormessage(emsg, "Please enter correct Bill amount");
+        show(emsg, "block");
+        hide(nextdiv);
     }
-  } else {
-    showMessage("Invalid Bill Amount");
-  }
-});
-function showMessage(msg) {
-  message.style.display = "block";
-  message.innerText = msg;
+})
+check.addEventListener("click", function check() {
+    if (Number(outputamt.value) < Number(inputamt.value)) {
+        errormessage(cashmsg, "This amount is not enough");
+        show(cashmsg, "block");
+        hide(ctable);
+
+    } else if (Number(outputamt.value) === Number(inputamt.value)) {
+        errormessage(cashmsg, "Great! you paid the exact amount");
+        show(cashmsg, "block");
+        hide(ctable);
+
+    } else {
+
+        var amount = Number(outputamt.value) - Number(inputamt.value);
+        returnAmount(amount);
+
+    }
+})
+
+function show(input, typ) {
+    input.style.display = typ;
 }
 
-function calculateChange(amountToReturned) {
-  for (let i = 0; i < availableNotes.length; i++) {
-    const numberOfNotes = Math.trunc(amountToReturned / availableNotes[i]);
-    amountToReturned %= availableNotes[i];
-    noOfNotes[i].innerText = numberOfNotes;
-  }
+function hide(input) {
+    input.style.display = "none";
 }
 
+function errormessage(typ, msg) {
+    typ.innerText = msg;
+
+}
+const bills = [2000, 500, 100, 20, 10, 5, 1];
+
+function returnAmount(amount) {
+
+
+    for (var i = 0; i < bills.length; i++) {
+        var c = Math.trunc(amount / bills[i]);
+
+        if (c > 0) {
+            var req = document.querySelector(".row" + i);
+
+            req.innerText = c;
+        }
+        amount = amount % bills[i];
+    }
+    show(ctable, "block");
+    hide(cashmsg);
+
+
+}
