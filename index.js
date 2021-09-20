@@ -6,9 +6,11 @@ var outputamt = document.querySelector(".inputbox-cashgiven");
 var check = document.querySelector(".check");
 var cashmsg = document.querySelector(".cashmsg");
 var ctable = document.querySelector(".table");
+var clr= document.querySelector("#clr-btn");
 hide(nextdiv);
 hide(cashmsg);
 hide(ctable);
+hide(clr);
 
 nxtbtn.addEventListener("click", function next() {
     if (Number(inputamt.value) > 0) {
@@ -39,6 +41,7 @@ check.addEventListener("click", function check() {
     } else {
         var amount = Number(outputamt.value) - Number(inputamt.value);
         returnAmount(amount);
+        show(clr,"block")
     }
 })
 
@@ -69,3 +72,12 @@ function returnAmount(amount) {
     show(ctable, "block");
     hide(cashmsg);
 }
+
+clr.addEventListener("click",()=>{
+    inputamt.value="";
+    outputamt.value="";
+    for(let i=0; i<=6;i++){
+        var req = document.querySelector(".row" + i);
+        req.innerText="";
+    }
+} )
